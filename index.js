@@ -12,6 +12,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Prefijo para las rutas
+const API_PREFIX = "/api-notification-push";
+
 // Configuración de Swagger
 const swaggerOptions = {
   definition: {
@@ -26,7 +29,7 @@ const swaggerOptions = {
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(`${API_PREFIX}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Ruta del archivo de credenciales descargado desde Firebase Console
 const SERVICE_ACCOUNT_PATH = "./cred.go.json";
@@ -40,6 +43,10 @@ if (!fs.existsSync(SERVICE_ACCOUNT_PATH)) {
 }
 
 const serviceAccount = JSON.parse(fs.readFileSync(SERVICE_ACCOUNT_PATH));
+
+// Router para las rutas con prefijo
+const router = express.Router();
+
 /**
  * @swagger
  * tags:
@@ -80,7 +87,7 @@ const serviceAccount = JSON.parse(fs.readFileSync(SERVICE_ACCOUNT_PATH));
  *       500:
  *         description: Error al enviar la notificación
  */
-app.post("/send-notification", async (req, res) => {
+router.post("/send-notification", async (req, res) => {
   const { deviceToken, title, body } = req.body;
 
   console.log("deviceToken:", deviceToken);
@@ -125,9 +132,12 @@ app.post("/send-notification", async (req, res) => {
   }
 });
 
+// Usar el router con el prefijo
+app.use(API_PREFIX, router);
+
 // Iniciar el servidor
 const PORT = 5011;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`Swagger disponible en http://localhost:${PORT}/api-docs`);
+  console.log(`Swagger disponible en http://localhost:${PORT}${API_PREFIX}/api-docs`);
 });
