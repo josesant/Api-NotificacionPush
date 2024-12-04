@@ -16,6 +16,8 @@ logs/
 
 # Firebase Service Account Credentials
 notificationpush-49ee8-firebase-adminsdk-uhabt-1c9800d045.json
+cred.go.json
+
 
 # System files
 .DS_Store

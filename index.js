@@ -29,7 +29,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Ruta del archivo de credenciales descargado desde Firebase Console
-const SERVICE_ACCOUNT_PATH = "./notificationpush-49ee8-firebase-adminsdk-uhabt-1c9800d045.json";
+const SERVICE_ACCOUNT_PATH = "./cred.go.json";
 
 // Verificar si el archivo existe
 if (!fs.existsSync(SERVICE_ACCOUNT_PATH)) {
