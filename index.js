@@ -24,6 +24,11 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "API para manejar notificaciones push con Firebase",
     },
+    servers: [
+      {
+        url: `https://cochadevprod.com.ar${API_PREFIX}`, // Prefijo incluido en las URLs
+      },
+    ],
   },
   apis: [__filename], // Indica que las definiciones están en este archivo
 };
