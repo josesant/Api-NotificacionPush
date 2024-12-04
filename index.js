@@ -126,7 +126,7 @@ app.post("/send-notification", async (req, res) => {
 });
 
 // Iniciar el servidor
-const PORT = 3011;
+const PORT = 5011;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
   console.log(`Swagger disponible en http://localhost:${PORT}/api-docs`);
