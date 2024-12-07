@@ -1,5 +1,5 @@
 const swaggerJsdoc = require("swagger-jsdoc");
-
+require("dotenv").config();
 const API_PREFIX = process.env.API_PREFIX ;
 const SERVER_URL = process.env.SWAGGER_SERVER_URL ;
 
