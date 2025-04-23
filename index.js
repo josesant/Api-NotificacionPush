@@ -170,7 +170,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
 const notificationRoutes = require("./routes/notificationRoutes");
 const errorHandler = require("./middlewares/errorHandler");
-
+const faceRoutes = require('./routes/faceRoute');
 
 const app = express();
 const API_PREFIX = process.env.API_PREFIX ;
@@ -179,6 +179,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(`${API_PREFIX}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(API_PREFIX, notificationRoutes);
+app.use(API_PREFIX, faceRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.API_PORT || 5011;
