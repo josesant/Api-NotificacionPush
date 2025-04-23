@@ -1,5 +1,5 @@
 const express = require("express");
-const { sendNotification } = require("../controllers/notificationController");
+const { sendNotification, validateToken } = require("../controllers/notificationController");
 
 const router = express.Router();
 
@@ -39,5 +39,40 @@ const router = express.Router();
  *         description: Error al enviar la notificación
  */
 router.post("/send-notification", sendNotification);
+
+/**
+ * @swagger
+ * /validate-token:
+ *   post:
+ *     summary: Valida un token de FCM
+ *     tags: [Notificaciones]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 description: Token de FCM a validar
+ *     responses:
+ *       200:
+ *         description: Token válido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 valid:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: Token inválido
+ *       500:
+ *         description: Error al validar el token
+ */
+router.post("/validate-token", validateToken);
 
 module.exports = router;
